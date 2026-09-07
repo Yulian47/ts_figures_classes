@@ -10,12 +10,21 @@ function roundDownHundredths(value: number): number {
 
 export class Triangle implements Figure {
   public readonly shape = 'triangle' as const;
+
   public readonly color: 'red' | 'green' | 'blue';
+
   private a: number;
+
   private b: number;
+
   private c: number;
 
-  constructor(color: 'red' | 'green' | 'blue', a: number, b: number, c: number) {
+  constructor(
+    color: 'red' | 'green' | 'blue',
+    a: number,
+    b: number,
+    c: number,
+  ) {
     this.color = color;
     this.a = a;
     this.b = b;
@@ -27,6 +36,7 @@ export class Triangle implements Figure {
 
     const max = Math.max(a, b, c);
     const sum = a + b + c;
+
     if (max >= sum - max) {
       throw new Error(`sides ${a}, ${b} and ${c} can't form a triangle`);
     }
@@ -35,13 +45,16 @@ export class Triangle implements Figure {
   public getArea(): number {
     const s = (this.a + this.b + this.c) / 2;
     const area = Math.sqrt(s * (s - this.a) * (s - this.b) * (s - this.c));
+
     return roundDownHundredths(area);
   }
 }
 
 export class Circle implements Figure {
   public readonly shape = 'circle' as const;
+
   public readonly color: 'red' | 'green' | 'blue';
+
   private radius: number;
 
   constructor(color: 'red' | 'green' | 'blue', radius: number) {
@@ -55,14 +68,18 @@ export class Circle implements Figure {
 
   public getArea(): number {
     const area = Math.PI * this.radius * this.radius;
+
     return roundDownHundredths(area);
   }
 }
 
 export class Rectangle implements Figure {
   public readonly shape = 'rectangle' as const;
+
   public readonly color: 'red' | 'green' | 'blue';
+
   private width: number;
+
   private height: number;
 
   constructor(color: 'red' | 'green' | 'blue', width: number, height: number) {
@@ -77,6 +94,7 @@ export class Rectangle implements Figure {
 
   public getArea(): number {
     const area = this.width * this.height;
+
     return roundDownHundredths(area);
   }
 }
@@ -84,5 +102,6 @@ export class Rectangle implements Figure {
 export function getInfo(figure: Figure): string {
   const area = figure.getArea();
   const areaStr = Number.isInteger(area) ? String(area) : area.toFixed(2);
+
   return `A ${figure.color} ${figure.shape} - ${areaStr}`;
 }
