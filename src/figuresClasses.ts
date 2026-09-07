@@ -82,3 +82,4 @@ export function getInfo(figure: Figure): string {
 
   return `A ${figure.color} ${figure.shape} - ${areaStr}`;
 }
+
